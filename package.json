@@ -1,0 +1,19 @@
+{
+  "name": "budget_calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amj311/node_budget_calculator.git"
+  },
+  "author": "amj311",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amj311/node_budget_calculator/issues"
+  },
+  "homepage": "https://github.com/amj311/node_budget_calculator#readme"
+}
