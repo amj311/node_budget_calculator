@@ -158,8 +158,8 @@
 
 				if(node != null){
 					while(flag){
-						if(node.leftchildchild){
-							node = node.leftchildchild;
+						if(node.leftchild){
+							node = node.leftchild;
 						}else{
 							flag = false;
 							return node.element;
@@ -176,8 +176,8 @@
 
 				if(node != null){
 					while(flag){
-						if(node.rightchildchild){
-							node = node.rightchildchild;
+						if(node.rightchild){
+							node = node.rightchild;
 						}else{
 							flag = false;
 							return node.element;
