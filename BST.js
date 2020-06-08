@@ -129,16 +129,39 @@
 				}
 				
 			}
-		};
+        };
+        
 		//Find whether element exist in exisiting BST
 		this.contains = function(x){
-			var flag = true,
+			var found = false,
 				node = this.tree;
 
-			while(flag){
+			while(!found){
 				if(node != null){
 					if(x === node.element){
-						flag = false;
+						found = true;
+						return true;
+					}else if(x > node.element){
+						node = node.rightchild;
+					}else if(x < node.element){
+						node = node.leftchild;
+					}	
+				}else{
+					return false;
+				}
+				
+			}
+        };
+        
+		//Find whether element exist in exisiting BST
+		this.lessOrEqualTo = function(x){
+			var found = false,
+				node = this.tree;
+
+			while(!found){
+				if(node != null){
+					if(x === node.element){
+						found = true;
 						return true;
 					}else if(x > node.element){
 						node = node.rightchild;
