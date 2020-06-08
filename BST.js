@@ -158,21 +158,25 @@
 			var found = false,
 				node = this.tree;
 
-			while(!found){
-				if(node != null){
-					if(x === node.element){
-						found = true;
-						return true;
-					}else if(x > node.element){
-						node = node.rightchild;
-					}else if(x < node.element){
-						node = node.leftchild;
-					}	
-				}else{
-					return false;
-				}
-				
-			}
+			while (!found) {
+				if (node != null) {
+					if (x === node.element) found = true;
+					else if (node.element > x) {
+                        if (!node.leftchild) return {found, val: null}
+                        else  node = node.leftchild;
+                    }
+                    else if (node.element < x) {
+                        if (node.rightchild) {
+                            if (node.rightchild.element <= x) node = node.rightchild;
+                            else if (node.rightchild.leftchild && node.rightchild.leftchild.element <= x) node = node.rightchild.leftchild;
+                            else found = true;
+                        }
+						else found = true;
+                    }
+                }		
+            }
+            
+            return {found, val: node.element};
 		};
 		//Find element in BST with minimum value
 		this.minValue = function(){

@@ -72,12 +72,10 @@ initCal();
 
 // calc1Year();
 
-calendar.eventsBST.add(5);
-calendar.eventsBST.add(10);
-calendar.eventsBST.add(2);
-calendar.eventsBST.add(7);
-calendar.eventsBST.add(9);
-calendar.eventsBST.add(7);
-calendar.eventsBST.add(4);
+calendar.eventsBST.add(16);
+calendar.eventsBST.add(15);
+calendar.eventsBST.add(14);
+calendar.eventsBST.add(13);
 console.log(calendar.eventsBST.toString())
 console.log(calendar.eventsBST.contains(5))
+console.log(calendar.eventsBST.lessOrEqualTo(10).found)
