@@ -41,8 +41,31 @@ var goals = {
 
 var calendar = {
     init: {},
-    events: {},
-    eventsBST: new bstSrc.BST(),
+    monthSums: {},
+    monthSumsBST: new bstSrc.BST(),
+    
+    printMonths() {
+        const colWidth = 10;
+        var headerStr = "";
+        var dividerStr = "";
+        var balanceRowStr = "";
+
+        for (let [key, summary] of Object.entries(this.monthSums)) {
+            console.log(key, summary)
+            var headerGap = colWidth - summary.month.format('MMM').length;
+            headerStr += summary.month.format('MMM');
+            for (i = 0; i < headerGap; i++) headerStr += " ";
+
+            for (i = 0; i < colWidth; i++) dividerStr += "-";
+
+            
+            var cellGap = colWidth - String(summary.totalAssets).length;
+            balanceRowStr += summary.totalAssets;
+            for (i = 0; i < cellGap; i++) balanceRowStr += " ";
+        }
+
+        console.log(headerStr+'\n'+dividerStr+'\n'+balanceRowStr);
+    },
 };
 
 function initCal() {
@@ -54,28 +77,26 @@ function initCal() {
 function calc1Year() {
 
     for (let i = 0; i < 12; i++) {
+        // console.log("\n\nCal before loop:", calendar.monthSums)
         let month = moment().add(i, 'month')
-        console.log(month)
-        let prevMonth = calendar[month-1] ||  calendar.init;
-        console.log(prevMonth)
+        // console.log("\nComputng month: ", month.month())
 
-        calendar.events[month.format('X')] = {month};
-    }
+        const { found, val } = calendar.monthSumsBST.lessOrEqualTo(month.format('X'));
+        // console.log("BST res: ", found, val)
+        prevMonthSum = found ? calendar.monthSums[val] : calendar.init;
+        // console.log("prevMonth: ", prevMonthSum)
 
+        calendar.monthSumsBST.add(month.format('X'))
+        calendar.monthSums[month.format('X')] = {month, totalAssets: prevMonthSum.totalAssets + 1500};
+        // console.log(calendar.monthSumsBST.toString());
+        // console.log(calendar.monthSums[month.format('X')]);
 
-    for (const [ts, state] of Object.entries(calendar.events)) {
-        console.log(ts, state);
+        // console.log("Cal at end of loop:", calendar.monthSums)
     }
 }
 
 initCal();
 
-// calc1Year();
+calc1Year();
 
-calendar.eventsBST.add(16);
-calendar.eventsBST.add(15);
-calendar.eventsBST.add(14);
-calendar.eventsBST.add(13);
-console.log(calendar.eventsBST.toString())
-console.log(calendar.eventsBST.contains(5))
-console.log(calendar.eventsBST.lessOrEqualTo(10).found)
+calendar.printMonths();
