@@ -81,7 +81,7 @@ function calc1Year() {
         let month = moment().add(i, 'month')
         // console.log("\nComputng month: ", month.month())
 
-        const { found, val } = calendar.monthSumsBST.lessOrEqualTo(month.format('X'));
+        const { found, val } = calendar.monthSumsBST.nearestLessThan(month.format('X'));
         // console.log("BST res: ", found, val)
         prevMonthSum = found ? calendar.monthSums[val] : calendar.init;
         // console.log("prevMonth: ", prevMonthSum)
