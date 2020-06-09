@@ -1,8 +1,12 @@
 //// Starting file for budget calculator.
 const moment = require('moment');
 const bstSrc = require('./BST'); 
+const {BudgetTransaction} = require('./BudgetItems.js')
 
-var accounts = {
+var item = new BudgetTransaction();
+console.log(item)
+
+var realTime_Accounts = {
 
     26739094: {
         type: 'checking',
@@ -46,6 +50,8 @@ var calendar = {
 
         let minTs = this.monthSumsBST.minValue();
         let maxTs = this.monthSumsBST.maxValue();
+
+        if (!minTs || !maxTs) return console.warn("Insufficient data to calculate period!");
         
         console.log('\n          Projected Income Over Period ' + this.monthSums[minTs].month.format('MMM YYYY') + " - " + this.monthSums[maxTs].month.format('MMM YYYY'))
 
@@ -63,7 +69,6 @@ var calendar = {
             for (i = 0; i < headerGap; i++) headerStr += " ";
 
             for (i = 0; i < colWidth; i++) dividerStr += "-";
-
             
             var cellGap = colWidth - String(summary.totalAssets).length;
             balanceRowStr += summary.totalAssets;
@@ -138,6 +143,6 @@ function calc1Year() {
 
 initCal();
 
-calc1Year();
+// calc1Year();
 
 calendar.printMonths();
