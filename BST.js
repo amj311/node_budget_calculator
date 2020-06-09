@@ -152,17 +152,16 @@
 				
 			}
         };
-        
-		//Find whether element exist in exisiting BST
-		this.lessOrEqualTo = function(x){
+        //Find the element nearest to but less than x
+		this.nearestLessThan = function(x){
 			var found = false,
 				node = this.tree;
 
 			while (!found) {
 				if (node != null) {
-					if (x === node.element) found = true;
+					if (x === node.element) return {found, val: null};
 					else if (node.element > x) {
-                        if (!node.leftchild) return {found, val: null}
+                        if (!node.leftchild) return {found, val: null};
                         else  node = node.leftchild;
                     }
                     else if (node.element < x) {
@@ -173,11 +172,19 @@
                         }
 						else found = true;
                     }
-                }		
+                }
+                else return {found, val: null}	
             }
             
             return {found, val: node.element};
-		};
+        };
+        
+		// Find the element nearest to but less than x
+		this.lessThanOrEqualTo = function(x){
+            if (this.contains(x)) return {found: true, val: x};
+            else return this.nearestLessThan(x);
+        };
+        
 		//Find element in BST with minimum value
 		this.minValue = function(){
 			var flag = true,
