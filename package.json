@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/amj311/node_budget_calculator#readme",
   "dependencies": {
-    "moment": "^2.26.0"
+    "moment": "^2.29.2"
   }
 }
